@@ -1,5 +1,6 @@
 package edu.univdhaka.cse2216.myplane.activities;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -71,6 +72,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         doneData = new DoneDatabase(getContext());
         addButton = view.findViewById(R.id.addItem);
         listView =  view.findViewById(R.id.list_todo);
+
+        TextView emptyView=view.findViewById(R.id.emptyId);
+        listView.setEmptyView(emptyView);
 
 
         addButton.setOnClickListener(this);

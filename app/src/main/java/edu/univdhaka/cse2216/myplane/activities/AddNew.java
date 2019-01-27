@@ -135,6 +135,7 @@ public class AddNew extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
+
         if (view.getId() == R.id.clock || view.getId() == R.id.clockText)
         {
             Calendar calendar = Calendar.getInstance();

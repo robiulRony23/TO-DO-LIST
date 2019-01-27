@@ -1,8 +1,10 @@
 package edu.univdhaka.cse2216.myplane.activities;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -18,6 +20,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){
+            hideKeyboard(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -78,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             fm.popBackStack();
         }
-
 
 
         if(id==R.id.homeId)
@@ -191,5 +195,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void cancelAlarm(int id){
         new NotificationScheduler(id,0).cancelReminder(MainActivity.this, AlarmReceiver.class);
 
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputManager = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View currentFocusedView = activity.getCurrentFocus();
+        if (currentFocusedView != null) {
+            inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }
